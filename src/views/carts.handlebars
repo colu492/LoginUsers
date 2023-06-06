@@ -1,0 +1,33 @@
+
+<h2>Carros</h2>
+<div>
+        {{#if hasPrevPage }}
+            <a href='{{firstLink}}'>Primera</a>
+            <a href='{{prevLink}}'>Anterior</a>
+        {{else}}
+            <a>Primera</a>
+            <a>Anterior</a>
+        {{/if}}
+        {{#if hasNextPage }}
+            <a href='{{nextLink}}'>Siguiente</a>
+            <a href='{{lastLink}}'>Ultima</a>
+        {{else}}
+            <a>Siguiente</a>
+            <a>Ultima</a>
+        {{/if}}
+        <a>Siguiente</a>
+</div>
+<div>
+    <a href="?limit=5">ver 5</a>
+    <a href="?limit=10">ver 10</a>
+    <a href="?limit=20">ver 20</a>
+    <a href="?limit=50">ver 50</a>
+</div>
+<div>
+{{#each docs}}
+    <div>
+        <h3>{{this._id}}</h3>
+        <a href="../carts/{{this._id}}">Ver Carro</a>
+    </div>
+{{/each}}
+</div>

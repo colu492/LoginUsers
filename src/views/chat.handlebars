@@ -1,0 +1,27 @@
+
+<div >
+    <h3>Chat Legal</h3>
+    <div id="chatbox">
+        {{#each messages}}
+            <div user="{{this.user}}">
+                <div >
+                    {{this.user}}
+                </div>
+                <div>
+                    {{this.message}}
+                </div>
+                <div>
+                    {{this.date}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+    <form id="newMessage">
+        <h4>Mensaje</h4>
+        <textarea name="message" id="message" cols="20" rows="1"></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+
+</div>
+<script src="/socket.io/socket.io.js"></script>
+<script src="../scripts/chatScocketClient.js"></script>

@@ -1,0 +1,48 @@
+
+<h2>Cursos</h2>
+<div >
+    <div>
+        <a href='products'>Todas las categorías</a>
+        <a href='?query={"category":"curso"}'>Curso</a>
+        <a href='?query={"category":"clase individual"}'>Clase individual</a>
+    </div>
+    <div>
+        <a href='?query={"stock":{"$gt":"0"}}'>Cursos en stock</a>
+        <a href='products'>Todos los cursos</a>
+    </div>
+</div>
+<div>
+{{#each payload}}
+    <div>
+        <h3>{{this.title}}</h3>
+        <img src="https://d3puay5pkxu9s4.cloudfront.net/academy/imagenes/funnels/courses/img-2.png{{this.thumbnails}}"  alt="curso" width="100">
+        <h4>{{this.description}}</h4>
+        <p>Precio: ${{this.price}}</p>
+        <p>Stock: {{this.stock}}</p>
+        <input type="button" value="Agregar al carro">
+        <a href="../products/{{this.id}}">Ver detalles</a>
+    </div>
+{{/each}}
+</div>
+<div>
+        {{#if hasPrevPage }}
+            <a href='{{firstLink}}'>Primera</a>
+            <a href='{{prevLink}}'>Anterior</a>
+        {{else}}
+            <a>Primera</a>
+            <a>Anterior</a>
+        {{/if}}
+        {{#if hasNextPage }}
+            <a href='{{nextLink}}'>Siguiente</a>
+            <a href='{{lastLink}}'>Ultima</a>
+        {{else}}
+            <a>Siguiente</a>
+            <a>Ultima</a>
+        {{/if}}
+</div>
+<div>
+    <a href="?limit=5">ver 5</a>
+    <a href="?limit=10">ver 10</a>
+    <a href="?limit=20">ver 20</a>
+    <a href="?limit=50">ver 50</a>
+</div>

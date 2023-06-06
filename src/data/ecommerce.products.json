@@ -1,0 +1,106 @@
+[
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17988"
+        },
+        "title": "Curso de Derecho Laboral",
+        "description": "Aprende los fundamentos del derecho laboral y las leyes laborales vigentes.",
+        "category": "curso",
+        "status": true,
+        "thumbnails": ["curso_derecho_laboral.png"],
+        "code": "CODX000001",
+        "stock": 10,
+        "price": 199.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17989"
+        },
+        "title": "Curso de Derecho Penal",
+        "description": "Descubre los conceptos básicos del derecho penal y los diferentes tipos de delitos.",
+        "category": "curso",
+        "status": true,
+        "thumbnails": ["curso_derecho_penal.png"],
+        "code": "CODX000002",
+        "stock": 8,
+        "price": 249.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17990"
+        },
+        "title": "Curso de Derecho Civil",
+        "description": "Conoce los principios del derecho civil y las normas que rigen las relaciones privadas.",
+        "category": "curso",
+        "status": true,
+        "thumbnails": ["curso_derecho_civil.png"],
+        "code": "CODX000003",
+        "stock": 12,
+        "price": 179.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17991"
+        },
+        "title": "Curso de Derecho Administrativo",
+        "description": "Aprende sobre el derecho administrativo y los procesos legales en la administración pública.",
+        "category": "curso",
+        "status": true,
+        "thumbnails": ["curso_derecho_administrativo.png"],
+        "code": "CODX000004",
+        "stock": 5,
+        "price": 219.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17992"
+        },
+        "title": "Curso de Derecho Mercantil",
+        "description": "Descubre las normas que rigen las actividades comerciales y empresariales.",
+        "category": "clase individual",
+        "status": true,
+        "thumbnails": ["curso_derecho_mercantil.png"],
+        "code": "CODX000005",
+        "stock": 15,
+        "price": 189.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17993"
+        },
+        "title": "Curso de Derecho Internacional",
+        "description": "Aprende sobre las leyes y tratados que rigen las relaciones internacionales.",
+        "category": "clase individual",
+        "status": true,
+        "thumbnails": ["curso_derecho_internacional.png"],
+        "code": "CODX000006",
+        "stock": 7,
+        "price": 259.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17994"
+        },
+        "title": "Curso de Propiedad Intelectual",
+        "description": "Conoce los derechos de autor y las leyes de propiedad intelectual.",
+        "category": "curso",
+        "status": true,
+        "thumbnails": ["curso_propiedad_intelectual.png"],
+        "code": "CODX000007",
+        "stock": 10,
+        "price": 199.99
+    },
+    {
+        "_id": {
+            "$oid": "646f88b5d0738d8d23e17995"
+        },
+        "title": "Curso de Derecho Laboral Avanzado",
+        "description": "Amplía tus conocimientos sobre derecho laboral con temas especializados.",
+        "category": "clase individual",
+        "status": true,
+        "thumbnails": ["curso_derecho_laboral_avanzado.png"],
+        "code": "CODX000008",
+        "stock": 6,
+        "price": 279.99
+    }
+]

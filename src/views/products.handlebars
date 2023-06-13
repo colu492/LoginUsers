@@ -1,8 +1,17 @@
 
 <h2>Cursos</h2>
+{{#if user}}
+    {{#if user.role}}
+        {{#ifEqual user.role "admin"}}
+        <p>Bienvenido/a, Administrador/a</p>
+        {{else}}
+        <p>Bienvenido/a, Usuario/a {{user.firts_name}}</p>
+        {{/ifEqual}}
+    {{/if}}
+{{/if}}
 <div >
     <div>
-        <a href='products'>Todas las categorías</a>
+        <a href="/products">Cursos creados</a> | <a href="/products/create">Crea un producto</a>
         <a href='?query={"category":"curso"}'>Curso</a>
         <a href='?query={"category":"clase individual"}'>Clase individual</a>
     </div>
@@ -12,7 +21,7 @@
     </div>
 </div>
 <div>
-{{#each payload}}
+{{#each products}}
     <div>
         <h3>{{this.title}}</h3>
         <img src="https://d3puay5pkxu9s4.cloudfront.net/academy/imagenes/funnels/courses/img-2.png{{this.thumbnails}}"  alt="curso" width="100">

@@ -7,6 +7,7 @@ import __dirname from "./utils.js"
 //import FileStore from "session-file-store";
 import session from 'express-session'
 import MongoStore from "connect-mongo"
+import githubStrategy from './github.strategy.js';
 
 import { Server } from "socket.io";
 
@@ -19,12 +20,18 @@ import realTimeProductsRouter from "./routes/realTimeProducts.router.js";
 import chatRouter from "./routes/chat.router.js";
 import { messageModel } from "./dao/models/message.model.js";
 import sessionRouter from './routes/session.router.js'
-//import initializePassport from "./config/passport.config.js";
-//import passport from "passport";
+import initializePassport from "./config/passport.config.js";
+import passport from "passport";
 
 mongoose.set("strictQuery", false);
 
 const __filename = fileURLToPath(import.meta.url);
+
+const GITHUB_CLIENT_ID = 'Iv1.4bff6704cbebaf8c';
+const GITHUB_CLIENT_SECRET = 'b9bc9dc05970afe66da12becbd024ab3e70de5b5';
+const GITHUB_CALLBACK_URL = 'http://localhost:8080/session/github/callback';
+
+githubStrategy(GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET, GITHUB_CALLBACK_URL);
 
 const app = express();
 app.use(express.json());
@@ -60,19 +67,20 @@ app.use(session({
 app.use('/session', sessionRouter);
 
 // app.use(session({
-//     store: MongoStore.create({
-//         mongoUrl: ,
-//         dbName:
-//     }),
-//     secret: 'mysecret',
-//     resave: true,
-//     saveUninitialzed: true
-
-// }))
-
-// initializePassport()
-// app.use(passport.initialize())
-// app.use(passport.session())
+    //     store: MongoStore.create({
+        //         mongoUrl: ,
+        //         dbName:
+        //     }),
+        //     secret: 'mysecret',
+        //     resave: true,
+        //     saveUninitialzed: true
+        
+        // }))
+        
+        initializePassport()
+        app.use(passport.initialize())
+        app.use(passport.session())
+        app.get('/session/github', passport.authenticate('github'));
 
 try {
     await mongoose.connect(

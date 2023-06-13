@@ -26,5 +26,8 @@ router.get("/:id", async (req, res) => {
         });
     }
 });
+router.get('/create', (req, res) => {
+    res.render('create', {})
+})
 
 export default router;

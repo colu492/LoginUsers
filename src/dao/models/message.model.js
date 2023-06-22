@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const messageCollection = "messages";
+const messageCollection = "message";
 
 const messageSchema = new mongoose.Schema({
     user: {
@@ -16,5 +16,5 @@ const messageSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
-
+mongoose.set("strictQuery", false)
 export const messageModel = mongoose.model(messageCollection, messageSchema);

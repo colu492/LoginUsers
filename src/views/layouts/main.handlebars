@@ -7,8 +7,28 @@
     <title>People Mobility Argentina</title>
 </head>
 <body>
-    <img src="/assets/logo.png" alt="" width="300" ><br>
-    <h1>Cursos</h1>
+    <div class="menu_container">
+
+            <a href="#" class="logo_pemoar"><img src="assets/logo.png" alt="" style="height: 200px;"></a>
+
+            <nav class="navbar">
+
+                <ul>
+                    {{#if user}}
+                    <li><a href="#home">Cursos</a></li>
+                    {{/if}}
+                    <li><a href="#">Nosotros</a></li>
+                    <li><a href="#">Precios</a></li>
+                    <li><a href="#">Carrito</a></li>
+                </ul>
+
+            </nav>
+            <div>
+                {{user.first_name}}
+            </div>
+
+        </div>
+    <h1>Cursos Disponibles</h1>
     {{{body}}} 
 </body>
 </html>

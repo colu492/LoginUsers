@@ -34,6 +34,8 @@ const productSchema = new mongoose.Schema({
         required: true,
     },
 });
+
+mongoose.set("strictQuery", false)
 productSchema.plugin(mongoosePaginate);
 
 export const productModel = mongoose.model(productCollection, productSchema);

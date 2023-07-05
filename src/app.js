@@ -10,7 +10,9 @@ import cookieParser from "cookie-parser";
 import initializePassport from "./config/passport.config.js";
 import passport from "passport";
 import run from "./run.js";
-import __dirname from "./utils.js"
+import __dirname from "./utils.js";
+import dotenv from 'dotenv';
+dotenv.config()
 
 const app = express();
 
@@ -32,8 +34,8 @@ app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
 
-const MONGO_URI = "mongodb+srv://colu492:colu159159@cluster0.fiqaj09.mongodb.net/"
-const MONGO_DB_NAME = "integradora2"
+// const MONGO_URI = "mongodb+srv://colu492:colu159159@cluster0.fiqaj09.mongodb.net/"
+// const MONGO_DB_NAME = "integradora2"
 
 app.use(session({
     // store: MongoStore.create({
@@ -62,8 +64,8 @@ app.use(passport.session())
         // }))
         
 
-        mongoose.connect(MONGO_URI, {
-            dbName: MONGO_DB_NAME,
+        mongoose.connect(process.env.MONGO_URI, {
+            dbName: process.env.MONGO_DB_NAME,
             useNewUrlParser: true,
             useUnifiedTopology: true,
             })

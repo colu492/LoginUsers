@@ -1,5 +1,6 @@
 import passport from "passport";
 import { JWT_COOKIE_NAME } from "../utils.js";
+import UserDTO from '../dtos/UserDTO.js';
 
 export function renderRegister(req, res) {
     res.render('sessions/register');
@@ -18,11 +19,10 @@ export function loginUser(req, res, next) {
 }
 
 export function handleLoginResult(req, res) {
-    if (!req.user) {
-        return res.status(400).send({ status: "error", error: "Invalid credentials" });
+    // Si el inicio de sesión es exitoso, enviamos el DTO del usuario en lugar del objeto completo
+    const userDTO = new UserDTO(req.user);
+    res.json(userDTO);
     }
-    res.cookie(JWT_COOKIE_NAME, req.user.token).redirect('/products');
-}
 
 export function handleFailedRegister(req, res) {
     console.log('Fail Strategy');

@@ -1,6 +1,6 @@
 import fs from "fs";
 
-class ProductManager {
+export class ProductManager {
   // Clase que gestiona la lectura y escritura de archivos
 
     constructor(path) {

@@ -1,4 +1,5 @@
 import { productModel } from "../dao/models/product.model.js";
+import Ticket from "../dao/models/ticket.model.js";
 
 // Controlador para obtener todos los productos con límite opcional
 export async function getAllProducts(req, res) {
@@ -69,6 +70,20 @@ export async function createProduct(req, res) {
             status: "Success",
             productAdded
         });
+        // Verificar disponibilidad de stock
+        const products = [product]; // Colocamos el producto en un array para usar la función de utilidad
+        if (!checkProductAvailability(products)) {
+        // Si el stock no es suficiente, retornamos un error
+        return res.status(400).json({ error: "Not enough stock for the product" });
+        }
+
+        // Restar la cantidad vendida del stock del producto
+        product.stock -= product.quantity;
+        await product.save();
+            if (createdTicketId) {
+                product.ticket = createdTicketId;
+                await product.save();
+            }
     } catch (error) {
         console.log(error);
         res.json({ error });

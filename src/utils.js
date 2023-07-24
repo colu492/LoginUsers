@@ -39,5 +39,14 @@ export const passportCall = strategy => {
         })(req, res, next)
     }
 }
+export function checkProductAvailability(products) {
+    for (const product of products) {
+        if (product.quantity > product.stock) {
+            return false; // Si la cantidad vendida es mayor al stock, retorna falso
+        }
+    }
+    return true; // Si todos los productos tienen suficiente stock, retorna verdadero
+}
+
 
 export default __dirname

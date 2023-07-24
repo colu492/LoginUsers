@@ -1,4 +1,5 @@
 import { cartModel } from "../dao/models/cart.model.js";
+import Ticket from "../dao/models/ticket.model.js";
 
 // Obtener todos los carritos
 export async function getAllCarts(req, res) {
@@ -86,5 +87,24 @@ export async function addProductToCart(req, res) {
     res.json({ status: "Success", cart });
     } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
+    }
+}
+export async function checkoutCart(req, res) {
+    try {
+        const cart = req.user.cart; // Obtener el carrito del usuario desde el objeto de usuario autenticado
+
+        // Eliminar los productos del carrito
+        cart.products = [];
+        await cart.save();
+
+        // Crear el ticket asociado al carrito
+        const ticket = await Ticket.create({
+            cartId: cart._id,
+            total: totalAmount, // Asignar el total del ticket
+            products: products, // Asignar la lista de productos del ticket
+        });
+
+    } catch (err) {
+        res.status(500).json({ error: 'Internal Server Error' });
     }
 }

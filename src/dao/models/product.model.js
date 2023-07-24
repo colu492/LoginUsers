@@ -32,6 +32,11 @@ const productSchema = new mongoose.Schema({
     stock: {
         type: Number,
         required: true,
+        min: 0,
+    },
+    ticket: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Ticket",
     },
 });
 

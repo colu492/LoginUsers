@@ -86,6 +86,7 @@ export async function addProductToCart(req, res) {
 
     res.json({ status: "Success", cart });
     } catch (error) {
+    error = customizeError(1003);
     res.status(500).json({ error: 'Internal Server Error' });
     }
 }

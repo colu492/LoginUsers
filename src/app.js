@@ -14,6 +14,8 @@ import __dirname from "./utils.js";
 import dotenv from 'dotenv';
 dotenv.config()
 
+import mockingProductsRouter from './mocks/mockingProducts.js';
+
 const app = express();
 
 // mongoose.set("strictQuery", false);
@@ -33,6 +35,8 @@ app.use(cookieParser())
 app.engine("handlebars", handlebars.engine());
 app.set("views", __dirname + "/views");
 app.set("view engine", "handlebars");
+
+app.use('/mockingproducts', mockingProductsRouter);
 
 // const MONGO_URI = "mongodb+srv://colu492:colu159159@cluster0.fiqaj09.mongodb.net/"
 // const MONGO_DB_NAME = "integradora2"

@@ -50,6 +50,7 @@ export async function deleteProductById(req, res) {
             productDeleted
         });
     } catch (error) {
+        error = customizeError(1001);
         console.log(error);
         res.json({ error });
     }
@@ -84,6 +85,22 @@ export async function createProduct(req, res) {
                 product.ticket = createdTicketId;
                 await product.save();
             }
+        
+        // Si el producto fue creado exitosamente y tiene un campo "ticketId",
+        // creamos un nuevo ticket y lo asociamos al producto
+        if (product.ticketId) {
+            const ticket = new Ticket({
+                code: generateUniqueCode(), // Generar un código único para el ticket (puedes usar alguna librería como 'uuid' o 'shortid')
+                purchase_datetime: new Date(),
+                amount: product.price * product.quantity, // Calcular el monto del ticket en función del precio del producto y la cantidad comprada
+                purchaser: req.user.email, // Suponiendo que el usuario que realiza la compra está autenticado y su correo está almacenado en req.user.email
+                cartId: product.cartId, // Suponiendo que el carrito del usuario está asociado al producto
+            });
+            await ticket.save();
+            product.ticket = ticket._id;
+            await product.save();
+        }
+
     } catch (error) {
         console.log(error);
         res.json({ error });

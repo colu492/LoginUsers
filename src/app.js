@@ -12,11 +12,43 @@ import passport from "passport";
 import run from "./run.js";
 import __dirname from "./utils.js";
 import dotenv from 'dotenv';
+import { createLogger, transports, format } from 'winston'; // Importamos el módulo winston
+
 dotenv.config()
 
 import mockingProductsRouter from './mocks/mockingProducts.js';
 
 const app = express();
+
+// Ruta para el endpoint /loggerTest
+app.get("/loggerTest", (req, res) => {
+    const logger = getLogger(); // Obtener el logger adecuado según el entorno
+
+    // Registrar diferentes tipos de logs para probar el funcionamiento
+    logger.debug("This is a debug log.");
+    logger.http("This is an HTTP log.");
+    logger.info("This is an info log.");
+    logger.warning("This is a warning log.");
+    logger.error("This is an error log.");
+    logger.fatal("This is a fatal log.");
+
+    // Enviar una respuesta al cliente
+    res.json({ message: "Logs have been generated successfully." });
+});
+
+// Configuración del logger
+const logger = createLogger({
+    level: process.env.NODE_ENV === 'production' ? 'info' : 'debug', // Nivel según el entorno
+    transports: [
+        new transports.Console(), // Log en consola para desarrollo
+        new transports.File({ filename: 'errors.log', level: 'error' }) // Log en archivo 'errors.log' para errores
+    ],
+    format: format.combine(
+        format.colorize(), // Colorear el log en consola
+        format.timestamp({ format: 'YYYY-MM-DD HH:mm:ss' }), // Agregar timestamp
+        format.printf(({ level, message, timestamp }) => `${timestamp} [${level}]: ${message}`) // Formato del log
+    )
+});
 
 // mongoose.set("strictQuery", false);
 

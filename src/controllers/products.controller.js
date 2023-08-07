@@ -1,5 +1,8 @@
 import { productModel } from "../dao/models/product.model.js";
 import Ticket from "../dao/models/ticket.model.js";
+import getLogger from "../logger.js";
+
+const logger = getLogger(); // Obtener el logger adecuado según el entorno
 
 // Controlador para obtener todos los productos con límite opcional
 export async function getAllProducts(req, res) {
@@ -9,7 +12,7 @@ export async function getAllProducts(req, res) {
         
         res.json(products.slice(0, parseInt(limit)));
     } catch (error) {
-        console.log(error);
+        logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
 }
@@ -20,7 +23,7 @@ export async function renderRealTimeProductsView(req, res) {
         const products = await productModel.find().lean().exec();
         res.render('realTimeProducts', { data: products });
     } catch (error) {
-        console.log(error);
+        logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
 }
@@ -32,7 +35,7 @@ export async function getProductById(req, res) {
         const product = await productModel.findOne({ _id: id });
         res.json({ product });
     } catch (error) {
-        console.log(error);
+        logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
 }
@@ -49,9 +52,11 @@ export async function deleteProductById(req, res) {
             message: "Product Deleted!",
             productDeleted
         });
+        logger.info(`Producto con ID ${id} se elimino satisfactoriamente.`);
+
     } catch (error) {
         error = customizeError(1001);
-        console.log(error);
+        logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
 }
@@ -100,9 +105,11 @@ export async function createProduct(req, res) {
             product.ticket = ticket._id;
             await product.save();
         }
+        logger.info(`Nuevo producto creado con el ID ${product._id}.`);
+
 
     } catch (error) {
-        console.log(error);
+        logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
 }
@@ -119,8 +126,10 @@ export async function updateProductById(req, res) {
             status: "Success",
             product
         });
+        logger.info(`Producto con ID ${id} se actualizo satisfactoriamente.`);
+
     } catch (error) {
-        console.log(error);
+        logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
 }

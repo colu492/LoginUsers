@@ -47,6 +47,9 @@ export function checkProductAvailability(products) {
     }
     return true; // Si todos los productos tienen suficiente stock, retorna verdadero
 }
+export function isPremiumUser(user) {
+    return user.role === 'premium';
+}
 
 
 export default __dirname

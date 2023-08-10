@@ -9,7 +9,8 @@ import {
     handleLoginResult,
     handleFailedRegister,
     handleFailedLogin,
-    handleLogout
+    handleLogout,
+    requestPasswordReset,
 } from "../controllers/session.controller.js";
 
 const router = express.Router();
@@ -50,6 +51,10 @@ router.get('/failregister', handleFailedRegister);
 
 // Ruta para mostrar un mensaje de fallo en el inicio de sesión
 router.get('/faillogin', handleFailedLogin);
+
+
+// Solicitar restablecimiento de contraseña
+router.post("/reset-password", requestPasswordReset);
 
 export default router;
 

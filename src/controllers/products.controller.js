@@ -40,26 +40,6 @@ export async function getProductById(req, res) {
     }
 }
 
-// Controlador para eliminar un producto por su ID
-export async function deleteProductById(req, res) {
-    try {
-        const id = req.params.pid;
-        const productDeleted = await productModel.deleteOne({ _id: id });
-    
-        req.io.emit('updatedProducts', await productModel.find().lean().exec());
-        res.json({
-            status: "Success",
-            message: "Product Deleted!",
-            productDeleted
-        });
-        logger.info(`Producto con ID ${id} se elimino satisfactoriamente.`);
-
-    } catch (error) {
-        error = customizeError(1001);
-        logger.error(error); // Usar el logger para registrar el error
-        res.json({ error });
-    }
-}
 
 // Controlador para crear un nuevo producto
 export async function createProduct(req, res) {
@@ -132,4 +112,37 @@ export async function updateProductById(req, res) {
         logger.error(error); // Usar el logger para registrar el error
         res.json({ error });
     }
+
 }
+
+// Controlador para eliminar un producto por su ID
+export async function deleteProductById(req, res) {
+    try {
+        const id = req.params.pid;
+        const product = await productModel.findById(id);
+
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
+
+        // Verificar si el usuario es premium y es el dueño del producto, o si es admin
+        if ((req.user.role === "premium" && req.user.email === product.owner) || req.user.role === "admin") {
+            const productDeleted = await productModel.deleteOne({ _id: id });
+
+            // Emitir actualización a los clientes en tiempo real
+            req.io.emit('updatedProducts', await productModel.find().lean().exec());
+
+            res.json({
+                status: "Success",
+                message: "Product Deleted!",
+                productDeleted
+            });
+        } else {
+            return res.status(403).json({ error: "Permission denied" });
+        }
+    } catch (error) {
+        logger.error(error);
+        res.json({ error });
+    }
+}
+

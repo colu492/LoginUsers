@@ -1,5 +1,7 @@
 import { cartModel } from "../dao/models/cart.model.js";
 import Ticket from "../dao/models/ticket.model.js";
+import  userModel  from "../dao/models/user.model.js";
+import { isPremiumUser } from "../utils.js";
 
 // Obtener todos los carritos
 export async function getAllCarts(req, res) {
@@ -81,6 +83,14 @@ export async function addProductToCart(req, res) {
     if (!found) {
         cart.products.push({ id: productID, quantity });
     }
+
+            // Obtener el usuario autenticado
+            const user = await userModel.findById(req.user._id);
+
+            // Verificar si el usuario es premium y el producto le pertenece
+            if (isPremiumUser(user) && cart.owner.toString() === user._id.toString()) {
+                return res.status(400).json({ error: "Premium users cannot add their own products to the cart." });
+            }
 
     await cart.save();
 

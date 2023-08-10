@@ -13,12 +13,17 @@ import run from "./run.js";
 import __dirname from "./utils.js";
 import dotenv from 'dotenv';
 import { createLogger, transports, format } from 'winston'; // Importamos el módulo winston
+import usersRouter from './routes/users.router.js'; // Importar el router de users
+
 
 dotenv.config()
 
 import mockingProductsRouter from './mocks/mockingProducts.js';
 
 const app = express();
+
+app.use('/api/users', usersRouter); // Usar el router de users en la ruta /api/users
+
 
 // Ruta para el endpoint /loggerTest
 app.get("/loggerTest", (req, res) => {

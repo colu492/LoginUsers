@@ -5,25 +5,173 @@ import { getAllProducts, renderRealTimeProductsView, getProductById, deleteProdu
 
 const router = Router();
 
-// Ruta para obtener todos los productos con límite opcional
+/**
+ * @swagger
+ * /api/products:
+ *   get:
+ *     summary: Obtener todos los productos
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.get("/", getAllProducts);
 
-// Ruta para renderizar una vista de productos en tiempo real
+/**
+ * @swagger
+ * /api/products/view:
+ *   get:
+ *     summary: Renderizar vista de productos en tiempo real
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.get("/view", renderRealTimeProductsView);
 
-// Ruta para obtener un producto por su ID
+/**
+ * @swagger
+ * /api/products/{id}:
+ *   get:
+ *     summary: Obtener un producto por su ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID del producto a obtener
+ *         schema:
+ *           type: string
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.get("/:id", getProductById);
 
-// Ruta para eliminar un producto por su ID (solo administrador)
+/**
+ * @swagger
+ * /api/products/{pid}:
+ *   delete:
+ *     summary: Eliminar un producto por su ID (solo administrador)
+ *     parameters:
+ *       - in: path
+ *         name: pid
+ *         required: true
+ *         description: ID del producto a eliminar
+ *         schema:
+ *           type: string
+ *     security:
+ *       - jwt: []
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '401':
+ *         description: No autorizado
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.delete("/:pid", passport.authenticate('jwt', { session: false }), checkAdmin, deleteProductById);
 
-// Ruta para crear un nuevo producto (solo administrador)
+/**
+ * @swagger
+ * /api/products:
+ *   post:
+ *     summary: Crear un nuevo producto (solo administrador)
+ *     security:
+ *       - jwt: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *             required:
+ *               - name
+ *               - price
+ *               - stock
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '401':
+ *         description: No autorizado
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.post("/", passport.authenticate('jwt', { session: false }), checkAdmin, createProduct);
 
-// Ruta para actualizar un producto por su ID (solo administrador)
+/**
+ * @swagger
+ * /api/products/{pid}:
+ *   put:
+ *     summary: Actualizar un producto por su ID (solo administrador)
+ *     parameters:
+ *       - in: path
+ *         name: pid
+ *         required: true
+ *         description: ID del producto a actualizar
+ *         schema:
+ *           type: string
+ *     security:
+ *       - jwt: []
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *               price:
+ *                 type: number
+ *               stock:
+ *                 type: number
+ *             required:
+ *               - name
+ *               - price
+ *               - stock
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '401':
+ *         description: No autorizado
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.put("/:pid", passport.authenticate('jwt', { session: false }), checkAdmin, updateProductById);
 
-// Ruta para crear un nuevo producto y asociarlo a un ticket (solo usuarios autenticados)
+/**
+ * @swagger
+ * /api/products/{pid}:
+ *   delete:
+ *     summary: Eliminar un producto por su ID (solo administrador)
+ *     parameters:
+ *       - in: path
+ *         name: pid
+ *         required: true
+ *         description: ID del producto a eliminar
+ *         schema:
+ *           type: string
+ *     security:
+ *       - jwt: []
+ *     responses:
+ *       '200':
+ *         description: OK
+ *       '401':
+ *         description: No autorizado
+ *       '500':
+ *         description: Error interno del servidor
+ */
 router.post("/", passport.authenticate("jwt", { session: false }), createProduct);
 
 export default router;

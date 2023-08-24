@@ -2,6 +2,7 @@ import passport from "passport";
 import userModel from "../dao/models/user.model.js";
 import local from "passport-local"
 import passport_jwt from "passport-jwt";
+import bcrypt from "bcrypt"; 
 import { createHash, isValidPassword, generateToken, extractCookie } from "../utils.js";
 import { JWT_PRIVATE_KEY } from "../utils.js";
 
@@ -60,16 +61,28 @@ passport.use('login', new LocalStrategy({
 
         return done(null, user)
     }catch (error){
-
+        return done(error);
     }
 }));
 
 passport.use('jwt', new JWTStrategy({
     jwtFromRequest: ExtractJwt.fromExtractors([extractCookie]),
-    secretOrKey: JWT_PRIVATE_KEY
-}, async(jwt_payload, done) => {
-    done(null, jwt_payload)
-}));
+    secretOrKey: process.env.JWT_PRIVATE_KEY,
+}, async(jwt_payload, done) => {try {
+    const decoded = jwt.verify(jwt_payload, JWT_PRIVATE_KEY);
+    const userId = decoded.userId;
+    const user = await userModel.findById(userId);
+    if (!user) {
+        // El usuario no fue encontrado en la base de datos
+        return done(null, false);
+    }
+    return done(null, user);
+}catch (error) {
+    return done(error);
+    }
+}
+
+));
 
 passport.serializeUser((user, done) => {
     done(null, user._id);

@@ -1,5 +1,5 @@
 import passport from "passport";
-import { JWT_COOKIE_NAME } from "../utils.js";
+import { JWT_COOKIE_NAME, generateAdminToken, createHash } from "../utils.js";
 import UserDTO from '../dtos/UserDTO.js';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer'; 
@@ -84,4 +84,36 @@ export async function requestPasswordReset(req, res) {
         res.status(500).json({ error: 'Server error' });
     }
 }
+
+// Función para crear el usuario administrador
+async function createAdminUser() {
+    try {
+        const adminEmail = 'jccolucci.492@gmail.com'; // Correo del administrador
+        const adminPassword = 'colu1234'; // Contraseña del administrador
+
+        // Buscar si ya existe un usuario con el correo del administrador
+        const existingAdmin = await userModel.findOne({ email: adminEmail });
+
+        if (!existingAdmin) {
+            // Crear el usuario administrador en la base de datos
+            const adminUser = new userModel({
+                email: adminEmail,
+                password: createHash(adminPassword), // Asegúrate de tener la función createHash importada
+                role: 'admin',
+            });
+
+            await adminUser.save();
+        }
+    } catch (error) {
+        console.error('Error creating admin user:', error);
+    }
+}
+
+createAdminUser(); // Llamar a la función para crear el usuario administrador al iniciar la aplicación
+
+
+
+
+
+
 

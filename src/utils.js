@@ -4,10 +4,12 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken'
 import passport from 'passport'
 
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
-export const JWT_PRIVATE_KEY = 'secret'
+export const JWT_PRIVATE_KEY = process.env.JWT_PRIVATE_KEY;
+
 export const JWT_COOKIE_NAME = 'coderCookieToken'
 
 
@@ -50,6 +52,10 @@ export function checkProductAvailability(products) {
 export function isPremiumUser(user) {
     return user.role === 'premium';
 }
-
+export const generateAdminToken = () => {
+    const adminUser = { id: 'admin123', roles: ['admin'] }; // Datos del usuario administrador
+    const token = jwt.sign({ user: adminUser }, JWT_PRIVATE_KEY, { expiresIn: '24h' });
+    return token;
+};
 
 export default __dirname

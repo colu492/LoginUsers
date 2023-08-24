@@ -5,6 +5,7 @@ const options = {
         openapi: '3.0.0',
         info: {
             title: 'Documentación de API',
+            description: 'awesome documentation for my coder class',
             version: '1.0.0',
         },
     },

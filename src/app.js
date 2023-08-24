@@ -124,3 +124,5 @@ app.use(passport.session())
                 .catch((error) => {
                 console.log("Error al conectar a la base de datos:", error);
                 });
+
+                export default app;

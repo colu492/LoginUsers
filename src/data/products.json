@@ -1,33 +1,33 @@
 [
   {
-      "title": "Curso de Derecho Laboral",
-      "description": "Aprende los fundamentos del derecho laboral y las leyes laborales vigentes.",
-      "price": "199.99",
-      "category": "curso",
-      "status": "true",
-      "thumbnails": ["curso_derecho_laboral.png"],
-      "code": "CL001",
-      "stock": "10"
+    "title": "Curso de Derecho Laboral",
+    "description": "Aprende los fundamentos del derecho laboral y las leyes laborales vigentes.",
+    "price": "199.99",
+    "category": "curso",
+    "status": "true",
+    "thumbnails": ["curso_derecho_laboral.png"],
+    "code": "CL001",
+    "stock": "10"
   },
   {
-      "title": "Curso de Derecho Penal",
-      "description": "Descubre los conceptos básicos del derecho penal y los diferentes tipos de delitos.",
-      "price": "249.99",
-      "category": "curso",
-      "status": "true",
-      "thumbnails": ["curso_derecho_penal.png"],
-      "code": "CP002",
-      "stock": "8"
+    "title": "Curso de Derecho Penal",
+    "description": "Descubre los conceptos básicos del derecho penal y los diferentes tipos de delitos.",
+    "price": "249.99",
+    "category": "curso",
+    "status": "true",
+    "thumbnails": ["curso_derecho_penal.png"],
+    "code": "CP002",
+    "stock": "8"
   },
   {
-      "title": "Curso de Derecho de Familia",
-      "description": "Conoce las leyes y procedimientos relacionados con el derecho de familia y los matrimonios.",
-      "price": "179.99",
-      "category": "curso",
-      "status": "true",
-      "thumbnails": ["curso_derecho_familia.png"],
-      "code": "CF050",
-      "stock": "15"
+    "title": "Curso de Derecho de Familia",
+    "description": "Conoce las leyes y procedimientos relacionados con el derecho de familia y los matrimonios.",
+    "price": "179.99",
+    "category": "curso",
+    "status": "true",
+    "thumbnails": ["curso_derecho_familia.png"],
+    "code": "CF050",
+    "stock": "15"
   },
   {
     "title": "Curso de Derecho Laboral",
@@ -38,8 +38,8 @@
     "thumbnails": ["curso_derecho_laboral.png"],
     "code": "CL001",
     "stock": "10"
-},
-{
+  },
+  {
     "title": "Curso de Derecho Penal",
     "description": "Descubre los conceptos básicos del derecho penal y los diferentes tipos de delitos.",
     "price": "249.99",
@@ -48,8 +48,8 @@
     "thumbnails": ["curso_derecho_penal.png"],
     "code": "CP002",
     "stock": "8"
-},
-{
+  },
+  {
     "title": "Curso de Derecho Civil",
     "description": "Conoce los principios del derecho civil y las normas que rigen las relaciones privadas.",
     "price": "179.99",
@@ -58,8 +58,8 @@
     "thumbnails": ["curso_derecho_civil.png"],
     "code": "CC003",
     "stock": "12"
-},
-{
+  },
+  {
     "title": "Curso de Derecho Administrativo",
     "description": "Aprende sobre el derecho administrativo y los procesos legales en la administración pública.",
     "price": "219.99",
@@ -68,8 +68,8 @@
     "thumbnails": ["curso_derecho_administrativo.png"],
     "code": "CA004",
     "stock": "5"
-},
-{
+  },
+  {
     "title": "Curso de Derecho Mercantil",
     "description": "Descubre las normas que rigen las actividades comerciales y empresariales.",
     "price": "189.99",
@@ -78,8 +78,8 @@
     "thumbnails": ["curso_derecho_mercantil.png"],
     "code": "CM005",
     "stock": "15"
-},
-{
+  },
+  {
     "title": "Curso de Derecho Internacional",
     "description": "Aprende sobre las leyes y tratados que rigen las relaciones internacionales.",
     "price": "259.99",
@@ -88,8 +88,8 @@
     "thumbnails": ["curso_derecho_internacional.png"],
     "code": "CI006",
     "stock": "7"
-},
-{
+  },
+  {
     "title": "Curso de Propiedad Intelectual",
     "description": "Conoce los derechos de autor y las leyes de propiedad intelectual.",
     "price": "199.99",
@@ -98,8 +98,8 @@
     "thumbnails": ["curso_propiedad_intelectual.png"],
     "code": "PI007",
     "stock": "10"
-},
-{
+  },
+  {
     "title": "Curso de Derecho Laboral Avanzado",
     "description": "Amplía tus conocimientos sobre derecho laboral con temas especializados.",
     "price": "279.99",
@@ -108,6 +108,5 @@
     "thumbnails": ["curso_derecho_laboral_avanzado.png"],
     "code": "CLA008",
     "stock": "6"
-}
+  }
 ]
-
